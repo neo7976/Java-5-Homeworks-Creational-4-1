@@ -16,6 +16,8 @@ public class ProductFactory extends ProductImp {
         switch (productType) {
             case BREAD -> {
                 //получаем все наши значения хлеба
+                // Можно попробовать создавать каждый раз новую фабрику на этом шаге для получения хлеба или как-то
+                // через одну все извлекать
                 System.out.println(breadFactory.getList());
                 //Попробовать добавить сканер или динамический массив и вытаскивать через get(index + 1);
 //                product = breadFactory.getBread(breadType);
