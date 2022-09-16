@@ -11,7 +11,7 @@ public abstract class Drink implements Product {
         super();
         this.name = name;
         this.size = size;
-        this.price = setPrice(size);
+        this.price = newPrice(size);
         if (this.size == null)
             this.size = BeverageSize.M;
     }
@@ -24,7 +24,11 @@ public abstract class Drink implements Product {
         return price;
     }
 
-    public double setPrice(BeverageSize size) {
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public double newPrice(BeverageSize size) {
         if (getSize() != null) {
             switch (getSize()) {
                 case S -> price = 80d;

@@ -23,6 +23,6 @@ public enum BeverageSize {
 
     @Override
     public String toString() {
-        return String.format("(%s - %.2f)", name, size);
+        return String.format("(%s - %.2fL)", name, size);
     }
 }
