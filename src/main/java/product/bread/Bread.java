@@ -13,21 +13,6 @@ public abstract class Bread implements Product {
         this.weight = weight;
     }
 
-    public Bread setName(String name) {
-        this.name = name;
-        return this;
-    }
-
-    public Bread setPrice(int price) {
-        this.price = price;
-        return this;
-    }
-
-    public Bread setWeight(int weight) {
-        this.weight = weight;
-        return this;
-    }
-
     public String getName() {
         return name;
     }
