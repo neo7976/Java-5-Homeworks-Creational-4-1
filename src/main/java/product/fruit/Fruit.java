@@ -1,13 +1,13 @@
-package product.bread;
+package product.fruit;
 import product.Product;
 import java.util.Objects;
 
-public abstract class Bread implements Product {
+public abstract class Fruit implements Product {
     private String name;
     private int price;
     private int weight;
 
-    public Bread(String name, int price, int weight) {
+    public Fruit(String name, int price, int weight) {
         this.name = name;
         this.price = price;
         this.weight = weight;
@@ -35,8 +35,8 @@ public abstract class Bread implements Product {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Bread bread = (Bread) o;
-        return price == bread.price && weight == bread.weight && name.equals(bread.name);
+        Fruit fruit = (Fruit) o;
+        return price == fruit.price && weight == fruit.weight && Objects.equals(name, fruit.name);
     }
 
     @Override
@@ -44,3 +44,4 @@ public abstract class Bread implements Product {
         return Objects.hash(name, price, weight);
     }
 }
+

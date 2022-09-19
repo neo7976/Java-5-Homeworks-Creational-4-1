@@ -1,5 +1,8 @@
 package product.bread;
 
-public enum BreadType {
-    BAGUETTE, CIABATTA, WHEAT
+import product.Type;
+
+public enum BreadType{
+    BAGUETTE, CIABATTA, WHEAT;
+
 }
