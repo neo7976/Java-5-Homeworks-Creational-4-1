@@ -7,24 +7,23 @@ import product.bread.BreadFactory;
 import product.bread.BreadType;
 import product.bread.Wheat;
 
+import java.util.Scanner;
+
 public class ProductFactory extends ProductImp {
     BreadFactory breadFactory = new BreadFactory();
+    Scanner scanner = new Scanner(System.in);
 
     public Product getProduct(ProductType productType) {
 
         Product product = null;
+
         switch (productType) {
             case BREAD -> {
-                //получаем все наши значения хлеба
-                // Можно попробовать создавать каждый раз новую фабрику на этом шаге для получения хлеба или как-то
-                // через одну все извлекать
+                //получаем все наши значения хлеба и выбираем из списка
                 System.out.println(breadFactory.getList());
-                //Попробовать добавить сканер или динамический массив и вытаскивать через get(index + 1);
-//                product = breadFactory.getBread(breadType);
-                product = breadFactory.getBread(BreadType.BAGUETTE);
+                product = breadFactory.getBread(Enum.valueOf(BreadType.class, scanner.nextLine()));
             }
             case FRUIT -> {
-
             }
         }
         return product;
@@ -32,8 +31,10 @@ public class ProductFactory extends ProductImp {
 
     public static void main(String[] args) {
         ProductFactory pf = new ProductFactory();
-        System.out.println(pf.getProduct(ProductType.BREAD).toString());
-        System.out.println(pf.getProduct(ProductType.BREAD).toString());
-        System.out.println(pf.getProduct(ProductType.BREAD).toString());
+        System.out.println(pf.getProduct(Enum.valueOf(ProductType.class, pf.scanner.nextLine())));
+
+//        System.out.println(pf.getProduct(ProductType.BREAD).toString());
+//        System.out.println(pf.getProduct(ProductType.BREAD).toString());
+//        System.out.println(pf.getProduct(ProductType.BREAD).toString());
     }
 }
