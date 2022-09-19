@@ -12,16 +12,19 @@ public class Shop {
             if (type.equals("end")) {
                 break;
             }
-
-            switch (type) {
-                case "1" -> {
-                    System.out.println("В нашем магазине доступны следующие категории продуктов: ");
-                    pf.getList();
-                    pf.getProduct(Enum.valueOf(ProductType.class, pf.scanner.nextLine()));
-                    pf.getListBasket();
+            try {
+                switch (type) {
+                    case "1" -> {
+                        System.out.println("В нашем магазине доступны следующие категории продуктов: ");
+                        pf.getList();
+                        pf.getProduct(Enum.valueOf(ProductType.class, pf.scanner.nextLine()));
+                        pf.getListBasket();
+                    }
+                    case "2" -> System.out.println("Меню ещё в разработке");
+                    default -> System.out.println("Повторите ввод команды");
                 }
-                case "2" -> System.out.println("Меню ещё в разработке");
-                default -> System.out.println("Повторите ввод команды");
+            } catch (IllegalArgumentException e) {
+                e.printStackTrace();
             }
         }
         pf.scanner.close(); // закрываем сканер, если дальше не будем его использовать

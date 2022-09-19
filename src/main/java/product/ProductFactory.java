@@ -1,16 +1,15 @@
 package product;
 
+import jdk.swing.interop.SwingInterOpUtils;
+import product.bread.Bread;
 import product.bread.BreadFactory;
 import product.bread.BreadType;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class ProductFactory extends ProductImp {
+    private final Map<Product, Integer> mapBasket = new HashMap<>();
     private List<ProductType> productTypeList;
-    private final List<Product> listBasket = new ArrayList<>();
     BreadFactory breadFactory = new BreadFactory();
     public Scanner scanner = new Scanner(System.in);
 
@@ -20,10 +19,15 @@ public class ProductFactory extends ProductImp {
         switch (productType) {
             case BREAD -> {
                 //получаем все наши значения хлеба и выбираем из списка
+                //TODO попробовать создать интерфейс или абстрактный класс,
+                // от которого будут наследоваться остальные фабрики,
+                // чтобы создать один единый метод
                 printProductToBasket("Хлеб");
                 System.out.println(breadFactory.getList());
-                product = breadFactory.getBread(Enum.valueOf(BreadType.class, scanner.nextLine()));
-                listBasket.add(product);
+                Bread bread = breadFactory.getBread(Enum.valueOf(BreadType.class, scanner.nextLine()));
+                System.out.println("Какое количество данного продукта добавить в корзину?");
+                countProduct(bread,
+                        Integer.parseInt(scanner.nextLine()));
             }
             case FRUIT -> {
             }
@@ -45,8 +49,19 @@ public class ProductFactory extends ProductImp {
 
     public void getListBasket() {
         System.out.println("В вашей корзине имеются следующие продукты: ");
-        for (Product product : listBasket) {
-            System.out.println(product);
+        for (Map.Entry<Product, Integer> entry : mapBasket.entrySet()) {
+            System.out.println(entry.getKey() + "\t\t-\t\t" + entry.getValue() + " шт.");
         }
     }
+
+    public void countProduct(Product product, int value) {
+        if (value != 0) {
+            if (mapBasket.containsKey(product)) {
+                int count = mapBasket.get(product);
+                mapBasket.put(product, count + value);
+            } else
+                mapBasket.put(product, value);
+        }
+    }
+
 }

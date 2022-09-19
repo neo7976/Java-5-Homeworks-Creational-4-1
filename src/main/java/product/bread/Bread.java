@@ -2,6 +2,8 @@ package product.bread;
 
 import product.Product;
 
+import java.util.Objects;
+
 public abstract class Bread implements Product {
     private String name;
     private int price;
@@ -27,7 +29,20 @@ public abstract class Bread implements Product {
 
     @Override
     public String toString() {
-        return String.format("(%d г.)\t %s \t[%d руб.]",
+        return String.format("(%d г.)\t %s \t\t[%d руб.]",
                 weight, name, price);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Bread bread = (Bread) o;
+        return price == bread.price && weight == bread.weight && name.equals(bread.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, price, weight);
     }
 }
