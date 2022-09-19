@@ -9,7 +9,7 @@ import java.util.*;
 public class ProductFactory {
     private final Map<Product, Integer> mapBasket = new HashMap<>();
     private List<ProductType> productTypeList;
-    Factory<Bread> breadFactory = new BreadFactory();
+    Factory<Bread, BreadType> breadFactory = new BreadFactory();
     public Scanner scanner = new Scanner(System.in);
 
     public Product getProduct(ProductType productType) {
@@ -18,11 +18,9 @@ public class ProductFactory {
         switch (productType) {
             case BREAD -> {
                 //получаем все наши значения хлеба и выбираем из списка
-                //TODO попробовать создать интерфейс или абстрактный класс,
-                // от которого будут наследоваться остальные фабрики,
-                // чтобы создать один единый метод
                 productCreate(breadFactory, ProductType.BREAD);
-                product = breadFactory.getProductFromFactory(Enum.valueOf(BreadType.class, scanner.nextLine().toUpperCase()));
+                product = breadFactory.getProductFromFactory(Enum.valueOf(BreadType.class,
+                        scanner.nextLine().toUpperCase()));
                 System.out.println("Какое количество данного продукта добавить в корзину?");
                 countProduct(product,
                         Integer.parseInt(scanner.nextLine()));

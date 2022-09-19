@@ -1,13 +1,11 @@
 package product.bread;
 
 import product.Factory;
-import product.Product;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class BreadFactory implements Factory<Bread> {
+public class BreadFactory implements Factory<Bread, BreadType> {
     private List<BreadType> list;
 
     public Bread getProductFromFactory(BreadType breadType) {
