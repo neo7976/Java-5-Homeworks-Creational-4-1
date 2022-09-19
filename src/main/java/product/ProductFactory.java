@@ -3,6 +3,9 @@ package product;
 import product.bread.Bread;
 import product.bread.BreadFactory;
 import product.bread.BreadType;
+import product.fruit.Fruit;
+import product.fruit.FruitFactory;
+import product.fruit.FruitType;
 
 import java.util.*;
 
@@ -10,6 +13,7 @@ public class ProductFactory {
     private final Map<Product, Integer> mapBasket = new HashMap<>();
     private List<ProductType> productTypeList;
     Factory<Bread, BreadType> breadFactory = new BreadFactory();
+    Factory<Fruit, FruitType> fruitFactory = new FruitFactory();
     public Scanner scanner = new Scanner(System.in);
 
     public Product getProduct(ProductType productType) {
@@ -26,6 +30,12 @@ public class ProductFactory {
                         Integer.parseInt(scanner.nextLine()));
             }
             case FRUIT -> {
+                productCreate(fruitFactory, ProductType.FRUIT);
+                product = fruitFactory.getProductFromFactory(Enum.valueOf(FruitType.class,
+                        scanner.nextLine().toUpperCase()));
+                System.out.println("Какое количество данного продукта добавить в корзину?");
+                countProduct(product,
+                        Integer.parseInt(scanner.nextLine()));
             }
         }
         return product;
