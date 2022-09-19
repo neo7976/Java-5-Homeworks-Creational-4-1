@@ -11,6 +11,7 @@ import java.util.*;
 
 public class ProductFactory {
     private final Map<Product, Integer> mapBasket = new HashMap<>();
+    private Map<Product, Integer> mapOrder;
     private List<ProductType> productTypeList;
     Factory<Bread, BreadType> breadFactory = new BreadFactory();
     Factory<Fruit, FruitType> fruitFactory = new FruitFactory();
@@ -74,5 +75,9 @@ public class ProductFactory {
                 mapBasket.put(product, value);
         }
     }
+
+
+
+
 
 }
