@@ -9,8 +9,9 @@ public class Shop {
         while (true) {
             System.out.println("Для совершения покупки нажмите 1 или \"end\" для выхода");
             String type = pf.scanner.nextLine();
-            if (type.equals("end"))
+            if (type.equals("end")) {
                 break;
+            }
 
             switch (type) {
                 case "1" -> {
@@ -22,6 +23,7 @@ public class Shop {
                 case "2" -> System.out.println("Меню ещё в разработке");
                 default -> System.out.println("Повторите ввод команды");
             }
+            pf.scanner.close(); // закрываем сканер, если дальше не будем его использовать
         }
         //todo Прописать корзину, какие продукты и в каком количестве получили и счёт за них
     }
