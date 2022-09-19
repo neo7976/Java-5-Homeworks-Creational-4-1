@@ -1,6 +1,5 @@
 package product;
 
-import jdk.swing.interop.SwingInterOpUtils;
 import product.bread.Bread;
 import product.bread.BreadFactory;
 import product.bread.BreadType;
@@ -22,17 +21,21 @@ public class ProductFactory {
                 //TODO попробовать создать интерфейс или абстрактный класс,
                 // от которого будут наследоваться остальные фабрики,
                 // чтобы создать один единый метод
-                printProductToBasket("Хлеб");
-                System.out.println(breadFactory.getList());
-                Bread bread = breadFactory.getProductFromFactory(Enum.valueOf(BreadType.class, scanner.nextLine()));
+                productCreate(breadFactory, ProductType.BREAD);
+                product = breadFactory.getProductFromFactory(Enum.valueOf(BreadType.class, scanner.nextLine().toUpperCase()));
                 System.out.println("Какое количество данного продукта добавить в корзину?");
-                countProduct(bread,
+                countProduct(product,
                         Integer.parseInt(scanner.nextLine()));
             }
             case FRUIT -> {
             }
         }
         return product;
+    }
+
+    private void productCreate(Factory factory, Type type) {
+        printProductToBasket(type.getName());
+        System.out.println(factory.getList());
     }
 
     public void getList() {

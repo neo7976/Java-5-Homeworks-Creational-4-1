@@ -1,6 +1,6 @@
 package product;
 
-public enum ProductType {
+public enum ProductType implements Type{
     BREAD("Хлеб"),
     FRUIT("Фрукт");
 

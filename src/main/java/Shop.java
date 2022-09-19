@@ -17,7 +17,7 @@ public class Shop {
                     case "1" -> {
                         System.out.println("В нашем магазине доступны следующие категории продуктов: ");
                         pf.getList();
-                        pf.getProduct(Enum.valueOf(ProductType.class, pf.scanner.nextLine()));
+                        pf.getProduct(Enum.valueOf(ProductType.class, pf.scanner.nextLine().toUpperCase()));
                         pf.getListBasket();
                     }
                     case "2" -> System.out.println("Меню ещё в разработке");

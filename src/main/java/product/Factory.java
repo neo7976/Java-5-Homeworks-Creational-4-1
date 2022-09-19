@@ -7,6 +7,5 @@ import java.util.List;
 
 public interface Factory<T> {
     List<BreadType> getList();
-
     T getProductFromFactory(BreadType valueOf);
 }
