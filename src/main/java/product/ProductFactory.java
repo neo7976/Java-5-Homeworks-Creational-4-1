@@ -7,10 +7,10 @@ import product.bread.BreadType;
 
 import java.util.*;
 
-public class ProductFactory extends ProductImp {
+public class ProductFactory {
     private final Map<Product, Integer> mapBasket = new HashMap<>();
     private List<ProductType> productTypeList;
-    BreadFactory breadFactory = new BreadFactory();
+    Factory<Bread> breadFactory = new BreadFactory();
     public Scanner scanner = new Scanner(System.in);
 
     public Product getProduct(ProductType productType) {
@@ -24,7 +24,7 @@ public class ProductFactory extends ProductImp {
                 // чтобы создать один единый метод
                 printProductToBasket("Хлеб");
                 System.out.println(breadFactory.getList());
-                Bread bread = breadFactory.getBread(Enum.valueOf(BreadType.class, scanner.nextLine()));
+                Bread bread = breadFactory.getProductFromFactory(Enum.valueOf(BreadType.class, scanner.nextLine()));
                 System.out.println("Какое количество данного продукта добавить в корзину?");
                 countProduct(bread,
                         Integer.parseInt(scanner.nextLine()));

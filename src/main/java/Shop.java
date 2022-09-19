@@ -9,7 +9,7 @@ public class Shop {
         while (true) {
             System.out.println("Для совершения покупки нажмите 1 или \"end\" для выхода");
             String type = pf.scanner.nextLine();
-            if (type.equals("end")) {
+            if (type.toLowerCase().equals("end")) {
                 break;
             }
             try {
