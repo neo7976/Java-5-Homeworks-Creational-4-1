@@ -10,14 +10,14 @@ import product.fruit.FruitType;
 import java.util.*;
 
 public class ProductFactory {
-    private final Map<Product, Integer> mapBasket = new HashMap<>();
+    private final Map<ProductImp, Integer> mapBasket = new HashMap<>();
     private List<ProductType> productTypeList;
     Factory<Bread, BreadType> breadFactory = new BreadFactory();
     Factory<Fruit, FruitType> fruitFactory = new FruitFactory();
     public Scanner scanner = new Scanner(System.in);
 
-    public Product getProduct(ProductType productType) {
-        Product product = null;
+    public ProductImp getProduct(ProductType productType) {
+        ProductImp product = null;
 
         switch (productType) {
             case BREAD -> {
@@ -60,24 +60,24 @@ public class ProductFactory {
 
     public void getListBasket() {
         System.out.println("В вашей корзине имеются следующие продукты: ");
-        for (Map.Entry<Product, Integer> entry : mapBasket.entrySet()) {
+        for (Map.Entry<ProductImp, Integer> entry : mapBasket.entrySet()) {
             System.out.println(entry.getKey() + "\t\t-\t\t" + entry.getValue() + " шт.");
         }
     }
 
-    public Map<Product, Integer> getMapBasket() {
+    public Map<ProductImp, Integer> getMapBasket() {
         return mapBasket;
     }
 
     public double totalCount() {
         double total = 0;
-        for (Map.Entry<Product, Integer> entry : mapBasket.entrySet()) {
+        for (Map.Entry<ProductImp, Integer> entry : mapBasket.entrySet()) {
             total += entry.getKey().getPrice() * entry.getValue();
         }
         return total;
     }
 
-    public void countProduct(Product product, int value) {
+    public void countProduct(ProductImp product, int value) {
         if (value != 0) {
             if (mapBasket.containsKey(product)) {
                 int count = mapBasket.get(product);

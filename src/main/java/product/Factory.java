@@ -1,7 +1,5 @@
 package product;
 
-import product.fruit.FruitType;
-
 import java.util.List;
 
 public interface Factory<T, E> {

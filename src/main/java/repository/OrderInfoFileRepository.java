@@ -8,6 +8,9 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import order.OrderInfo;
 import product.Product;
+import product.ProductImp;
+import product.bread.Bread;
+import serializer.ProductSerializer;
 
 import java.io.*;
 import java.lang.reflect.Type;
@@ -19,7 +22,6 @@ public class OrderInfoFileRepository implements OrderInfoRepository {
     private final File repoFile;
     private final ObjectMapper mapper;
     private List<OrderInfo> infoList = new ArrayList<>();
-    private final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
     public OrderInfoFileRepository(File repoFile, ObjectMapper mapper) {
         createRepoFileIfNotExists(repoFile);
@@ -44,7 +46,7 @@ public class OrderInfoFileRepository implements OrderInfoRepository {
 
     @Override
     public String add(OrderInfo orderInfo) throws IOException {
-        if (repoFile.exists()) {
+        if (repoFile.exists() && repoFile.length() != 0) {
             String json = readString(String.valueOf(repoFile));
             infoList = jsonToList(json);
         }
@@ -54,7 +56,12 @@ public class OrderInfoFileRepository implements OrderInfoRepository {
 //                orderInfo.getCountSum(),
                 orderInfo.getCountTotal());
         infoList.add(order);
-        String json = GSON.toJson(infoList);
+        
+        //добавить сериализацию для OrderInfo
+        Gson gson = new GsonBuilder().setPrettyPrinting()
+                .registerTypeAdapter(ProductImp.class, new ProductSerializer())
+                .create();
+        String json = gson.toJson(infoList);
         writeString(json);
 
 //        try (Scanner scanner = new Scanner(repoFile); FileWriter writer = new FileWriter(repoFile, true)) {
@@ -124,7 +131,7 @@ public class OrderInfoFileRepository implements OrderInfoRepository {
     public List<OrderInfo> jsonToList(String json) throws IOException {
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.create();
-        Type type = new TypeToken<List<Product>>() {
+        Type type = new TypeToken<List<ProductImp>>() {
         }.getType();
         return gson.fromJson(json, type);
     }
