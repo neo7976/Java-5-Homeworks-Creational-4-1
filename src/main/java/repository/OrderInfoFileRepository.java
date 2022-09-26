@@ -7,19 +7,18 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import order.OrderInfo;
+import product.Product;
 
 import java.io.*;
 import java.lang.reflect.Type;
 import java.nio.file.Files;
-import java.util.List;
-import java.util.Scanner;
-import java.util.UUID;
+import java.util.*;
 
 public class OrderInfoFileRepository implements OrderInfoRepository {
 
     private final File repoFile;
     private final ObjectMapper mapper;
-    private List<OrderInfo> infoList;
+    private List<OrderInfo> infoList = new ArrayList<>();
     private final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
     public OrderInfoFileRepository(File repoFile, ObjectMapper mapper) {
@@ -110,7 +109,7 @@ public class OrderInfoFileRepository implements OrderInfoRepository {
         }
     }
 
-    public static String readString(String jsonWay) throws IOException {
+    public String readString(String jsonWay) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(jsonWay));
         StringBuilder sb = new StringBuilder();
         String s;
@@ -122,12 +121,11 @@ public class OrderInfoFileRepository implements OrderInfoRepository {
     }
 
 
-    public static List<OrderInfo> jsonToList(String json) {
-        Gson gson = new Gson();
-        Type type = new TypeToken<List<OrderInfo>>() {
+    public List<OrderInfo> jsonToList(String json) throws IOException {
+        GsonBuilder builder = new GsonBuilder();
+        Gson gson = builder.create();
+        Type type = new TypeToken<List<Product>>() {
         }.getType();
         return gson.fromJson(json, type);
     }
-
-
 }

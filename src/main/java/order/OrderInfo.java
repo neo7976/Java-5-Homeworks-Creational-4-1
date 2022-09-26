@@ -13,7 +13,7 @@ public class OrderInfo {
     private int weight;
     private int count;
     private int countSum;
-    private final double countTotal;
+    private double countTotal;
 
 
     public OrderInfo(String id, Map<Product, Integer> mapOrder
@@ -29,6 +29,9 @@ public class OrderInfo {
 //            , int countSum
             , double countTotal) {
         this(null, mapOrder, countTotal);
+    }
+
+    public OrderInfo() {
     }
 
     public void setMapOrder(Map<Product, Integer> mapOrder) {
@@ -71,5 +74,29 @@ public class OrderInfo {
 
     public double getCountTotal() {
         return countTotal;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    public void setCountSum(int countSum) {
+        this.countSum = countSum;
     }
 }
