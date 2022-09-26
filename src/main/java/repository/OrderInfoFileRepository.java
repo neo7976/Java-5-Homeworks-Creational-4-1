@@ -10,6 +10,7 @@ import order.OrderInfo;
 import product.Product;
 import product.ProductImp;
 import product.bread.Bread;
+import serializer.OrderSerializer;
 import serializer.ProductSerializer;
 
 import java.io.*;
@@ -56,9 +57,10 @@ public class OrderInfoFileRepository implements OrderInfoRepository {
 //                orderInfo.getCountSum(),
                 orderInfo.getCountTotal());
         infoList.add(order);
-        
+
         //добавить сериализацию для OrderInfo
         Gson gson = new GsonBuilder().setPrettyPrinting()
+                .registerTypeAdapter(OrderInfo.class, new OrderSerializer())
                 .registerTypeAdapter(ProductImp.class, new ProductSerializer())
                 .create();
         String json = gson.toJson(infoList);
