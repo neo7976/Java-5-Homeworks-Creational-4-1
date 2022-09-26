@@ -11,7 +11,6 @@ import java.util.*;
 
 public class ProductFactory {
     private final Map<Product, Integer> mapBasket = new HashMap<>();
-    private Map<Product, Integer> mapOrder;
     private List<ProductType> productTypeList;
     Factory<Bread, BreadType> breadFactory = new BreadFactory();
     Factory<Fruit, FruitType> fruitFactory = new FruitFactory();
@@ -66,6 +65,18 @@ public class ProductFactory {
         }
     }
 
+    public Map<Product, Integer> getMapBasket() {
+        return mapBasket;
+    }
+
+    public double totalCount() {
+        double total = 0;
+        for (Map.Entry<Product, Integer> entry : mapBasket.entrySet()) {
+            total += entry.getKey().getPrice() * entry.getValue();
+        }
+        return total;
+    }
+
     public void countProduct(Product product, int value) {
         if (value != 0) {
             if (mapBasket.containsKey(product)) {
@@ -76,8 +87,9 @@ public class ProductFactory {
         }
     }
 
-
-
+    public void remove(){
+        mapBasket.clear();
+    }
 
 
 }

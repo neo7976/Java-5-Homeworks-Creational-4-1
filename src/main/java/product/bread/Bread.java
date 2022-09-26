@@ -17,7 +17,7 @@ public abstract class Bread implements Product {
         return name;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 

@@ -42,7 +42,7 @@ public class OrderInfoFileRepository implements OrderInfoRepository {
     public String add(OrderInfo orderInfo) {
         OrderInfo order = new OrderInfo(UUID.randomUUID().toString(),
                 orderInfo.getMapOrder(),
-                orderInfo.getCountSum(),
+//                orderInfo.getCountSum(),
                 orderInfo.getCountTotal());
 
         try (Scanner scanner = new Scanner(repoFile); FileWriter writer = new FileWriter(repoFile, true)) {
@@ -58,6 +58,7 @@ public class OrderInfoFileRepository implements OrderInfoRepository {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        System.out.printf("Ваш заказ оформлен!\nНомер заказа %s ", order.getId());
         return order.getId();
     }
 
@@ -83,7 +84,7 @@ public class OrderInfoFileRepository implements OrderInfoRepository {
 
     private static boolean isOrderExist(OrderInfo orderInfo, OrderInfo existsValue) {
         return existsValue.getMapOrder().equals(orderInfo.getMapOrder())
-                && existsValue.getCountSum() == orderInfo.getCountSum()
+//                && existsValue.getCountSum() == orderInfo.getCountSum()
                 && existsValue.getCountTotal() == orderInfo.getCountTotal();
     }
 }
