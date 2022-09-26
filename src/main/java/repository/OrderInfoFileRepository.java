@@ -44,7 +44,7 @@ public class OrderInfoFileRepository implements OrderInfoRepository {
 
     @Override
     public String add(OrderInfo orderInfo) throws IOException {
-        if (repoFile.exists()) {
+        if (repoFile.exists() && repoFile.length() != 0) {
             String json = readString(String.valueOf(repoFile));
             infoList = jsonToList(json);
         }
