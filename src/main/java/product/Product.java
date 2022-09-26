@@ -1,13 +1,14 @@
 package product;
 
 public interface Product {
-//    public String name();
+    //    public String name();
 //
 //    public int calories();
 //
-//    public double price();
 //
 //    public double weight();
+
+    public double getPrice();
 
 
 }

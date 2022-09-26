@@ -65,6 +65,18 @@ public class ProductFactory {
         }
     }
 
+    public Map<Product, Integer> getMapBasket() {
+        return mapBasket;
+    }
+
+    public double totalCount() {
+        double total = 0;
+        for (Map.Entry<Product, Integer> entry : mapBasket.entrySet()) {
+            total += entry.getKey().getPrice() * entry.getValue();
+        }
+        return total;
+    }
+
     public void countProduct(Product product, int value) {
         if (value != 0) {
             if (mapBasket.containsKey(product)) {
@@ -74,5 +86,10 @@ public class ProductFactory {
                 mapBasket.put(product, value);
         }
     }
+
+    public void remove(){
+        mapBasket.clear();
+    }
+
 
 }
