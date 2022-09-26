@@ -17,6 +17,7 @@ public class Shop {
         mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
 
         File repoFile = new File("src/main/resources/orders.txt");
+//        File repoFile = new File("src/main/resources/orders.json");
         OrderInfoFileRepository orderInfoFileRepository = new OrderInfoFileRepository(repoFile, mapper);
 
         ProductFactory pf = new ProductFactory();
@@ -38,7 +39,6 @@ public class Shop {
                     case "2" -> {
                         String id = orderInfoFileRepository.add(new OrderInfo(pf.getMapBasket(), pf.totalCount()));
                         pf.remove();
-                        System.out.println("Ваш заказ оформлен!");
                     }
                     default -> System.out.println("Повторите ввод команды");
                 }

@@ -46,12 +46,11 @@ public class OrderInfoFileRepository implements OrderInfoRepository {
                 orderInfo.getCountTotal());
 
         try (Scanner scanner = new Scanner(repoFile); FileWriter writer = new FileWriter(repoFile, true)) {
-            while (scanner.hasNextLine()) {
-                OrderInfo existValue = mapper.readValue(scanner.nextLine(), OrderInfo.class);
-                if (isOrderExist(orderInfo, existValue))
-                    throw new RuntimeException("Order already exist");
-            }
-
+//            while (scanner.hasNextLine()) {
+//                OrderInfo existValue = mapper.readValue(scanner.nextLine(), OrderInfo.class);
+//                if (isOrderExist(orderInfo, existValue))
+//                    throw new RuntimeException("Order already exist");
+//            }
             String serializationOrderInfo = mapper.writeValueAsString(order);
             writer.append(String.format("%s%n", serializationOrderInfo));
 
