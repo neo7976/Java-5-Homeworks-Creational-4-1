@@ -19,6 +19,8 @@ dependencies {
     implementation 'com.fasterxml.jackson.module:jackson-module-scala_3:2.13.4'
     implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.13.3'
     implementation 'com.fasterxml.jackson.module:jackson-module-parameter-names:2.13.4'
+    implementation 'com.googlecode.json-simple:json-simple:1.1.1'
+    implementation 'com.google.code.gson:gson:2.9.0'
 }
 
 test {
