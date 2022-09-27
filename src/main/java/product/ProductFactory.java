@@ -62,9 +62,16 @@ public class ProductFactory {
         this.listBasket = listBasket;
     }
 
-    public List<ProductImp> getListBasket() {
+    public void printListBasket() {
         System.out.println("В вашей корзине имеются следующие продукты: ");
-        System.out.println(listBasket);
+        System.out.printf("|%s\t\t|%s \t\t|%s \t\t\t|%s|\n", "Вес", "Наименование", "Цена", "Количество");
+        for (ProductImp imp : listBasket) {
+            System.out.println(imp);
+        }
+
+    }
+
+    public List<ProductImp> getListBasket() {
         return listBasket;
     }
 

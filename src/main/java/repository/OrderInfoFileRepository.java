@@ -6,10 +6,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import order.OrderInfo;
 import product.ProductImp;
-import serializer.OrderDeserializer;
-import serializer.OrderSerializer;
-import serializer.ProductDeserializer;
-import serializer.ProductSerializer;
+
 
 import java.io.*;
 import java.lang.reflect.Type;
@@ -56,8 +53,6 @@ public class OrderInfoFileRepository implements OrderInfoRepository {
         infoList.add(order);
 
         Gson gson = new GsonBuilder().setPrettyPrinting()
-//                .registerTypeAdapter(ProductImp.class, new ProductSerializer())
-//                .registerTypeAdapter(OrderInfo.class, new OrderSerializer())
                 .create();
         String json = gson.toJson(infoList);
         writeString(json);
@@ -114,8 +109,6 @@ public class OrderInfoFileRepository implements OrderInfoRepository {
 
     public List<OrderInfo> jsonToList(String json) throws IOException {
         Gson gson = new GsonBuilder()
-//                .registerTypeAdapter(OrderInfo.class, new OrderDeserializer())
-//                .registerTypeAdapter(ProductImp.class, new ProductDeserializer())
                 .create();
         Type type = new TypeToken<List<OrderInfo>>() {
         }.getType();
