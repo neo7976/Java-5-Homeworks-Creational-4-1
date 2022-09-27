@@ -24,7 +24,10 @@ public class Shop {
         ProductFactory pf = new ProductFactory();
         System.out.println("Добро пожаловать в наш магазин!");
         while (true) {
-            System.out.println("Для совершения покупки нажмите 1, чтобы оформить заказ нажмите 2 или \"end\" для выхода");
+            System.out.println("\nДля совершения покупки нажмите 1;\n" +
+                    "Чтобы оформить заказ нажмите 2;\n" +
+                    "Найти свой заказ нажмите 3;\n" +
+                    "\"end\" для завершения работы.");
             String type = pf.scanner.nextLine();
             if (type.toLowerCase().equals("end")) {
                 break;
@@ -43,6 +46,10 @@ public class Shop {
                         e.printStackTrace();
                     }
                     pf.remove();
+                }
+                case "3"->{
+                    System.out.println("Введите номер заказа:");
+                    System.out.println(orderInfoFileRepository.getById(pf.scanner.nextLine()));
                 }
                 default -> System.out.println("Повторите ввод команды");
             }

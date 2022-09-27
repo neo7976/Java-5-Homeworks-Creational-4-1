@@ -25,17 +25,40 @@ public class OrderInfoFileRepository implements OrderInfoRepository {
         this.mapper = mapper;
     }
 
+//    @Override
+//    public OrderInfo getById(String id) {
+//        try (Scanner scanner = new Scanner(repoFile)) {
+//            while (scanner.hasNextLine()) {
+//                OrderInfo orderInfo = mapper.readValue(scanner.nextLine(), OrderInfo.class);
+//                if (orderInfo.getId().equals(id)) {
+//                    return orderInfo;
+//                }
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        return null;
+//    }
+
     @Override
     public OrderInfo getById(String id) {
-        try (Scanner scanner = new Scanner(repoFile)) {
-            while (scanner.hasNextLine()) {
-                OrderInfo orderInfo = mapper.readValue(scanner.nextLine(), OrderInfo.class);
-                if (orderInfo.getId().equals(id)) {
+        if (infoList.contains(id))
+            for (OrderInfo orderInfo : infoList) {
+                if (orderInfo.getId().contains(id))
                     return orderInfo;
-                }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        else if (repoFile.exists() && repoFile.length() != 0) {
+            String json = null;
+            try {
+                json = readString(String.valueOf(repoFile));
+                infoList = jsonToList(json);
+                for (OrderInfo orderInfo : infoList) {
+                    if (orderInfo.getId().contains(id))
+                        return orderInfo;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         return null;
     }

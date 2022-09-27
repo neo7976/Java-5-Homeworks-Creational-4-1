@@ -20,7 +20,7 @@ public class OrderInfo {
 
     private static final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
 
-    public OrderInfo(String id,String data, List<ProductImp> listOrder
+    public OrderInfo(String id, String data, List<ProductImp> listOrder
             , double countTotal) {
         this.id = id;
         this.data = dtf.format(LocalDateTime.now());
@@ -30,7 +30,7 @@ public class OrderInfo {
 
     public OrderInfo(List<ProductImp> listOrder
             , double countTotal) {
-        this(null, null,listOrder, countTotal);
+        this(null, null, listOrder, countTotal);
     }
 
     public OrderInfo() {
@@ -68,13 +68,23 @@ public class OrderInfo {
     public void setData(String data) {
         this.data = data;
     }
+    public String printListOrder() {
+        StringBuilder sb = new StringBuilder();
+        for (ProductImp productImp : listOrder) {
+            sb.append(productImp);
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
+
 
     @Override
     public String toString() {
-        return "OrderInfo{" +
-                "id='" + id + '\'' +
-                ", listOrder=" + listOrder +
-                ", priceTotal=" + priceTotal +
-                '}';
+        return "Данные по заказу:\n" +
+                "id: " + id +
+                "\ndata= " + data +
+                "\nСписок покупок:\n" + printListOrder()+
+                "\nИтог: " + priceTotal;
     }
 }
+

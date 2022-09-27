@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public interface OrderInfoRepository {
 
-    OrderInfo getById(String id);
+    OrderInfo getById(String id) throws IOException;
 
     String add(OrderInfo orderInfo) throws IOException;
 
