@@ -18,7 +18,7 @@ public class Shop {
         mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
 
 //        File repoFile = new File("src/main/resources/orders.txt");
-        File repoFile = new File("src/main/resources/orders.json");
+        File repoFile = new File("src/main/resources/orders1.json");
         OrderInfoFileRepository orderInfoFileRepository = new OrderInfoFileRepository(repoFile, mapper);
 
         ProductFactory pf = new ProductFactory();
@@ -34,7 +34,7 @@ public class Shop {
                     System.out.println("В нашем магазине доступны следующие категории продуктов: ");
                     pf.getList();
                     pf.getProduct(Enum.valueOf(ProductType.class, pf.scanner.nextLine().toUpperCase()));
-                    pf.getListBasket();
+                    pf.printListBasket();
                 }
                 case "2" -> {
                     try {

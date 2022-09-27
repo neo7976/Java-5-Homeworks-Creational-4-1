@@ -1,12 +1,16 @@
 package order;
 
+import com.google.gson.annotations.SerializedName;
 import product.ProductImp;
 
 import java.util.List;
 
 public class OrderInfo {
+    @SerializedName("Номер заказа")
     private String id;
+    @SerializedName("Список покупок")
     private List<ProductImp> listOrder;
+    @SerializedName("Итоговая цена")
     private double priceTotal;
 
 

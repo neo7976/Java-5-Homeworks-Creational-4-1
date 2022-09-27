@@ -52,7 +52,7 @@ public class ProductImp implements Product {
 
     @Override
     public String toString() {
-        return String.format("(%d г.)\t %s \t\t[%d руб.] \t\t - %d шт.", weight, name, price, count);
+        return String.format("(%d г.)\t %s\t\t\t[%d руб.] \t\t - %d шт.", weight, name, price, count);
     }
 
     @Override
