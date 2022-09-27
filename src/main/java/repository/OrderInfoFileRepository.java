@@ -48,6 +48,7 @@ public class OrderInfoFileRepository implements OrderInfoRepository {
         }
 
         OrderInfo order = new OrderInfo(UUID.randomUUID().toString(),
+                orderInfo.getData(),
                 orderInfo.getListOrder(),
                 orderInfo.getPriceTotal());
         infoList.add(order);
