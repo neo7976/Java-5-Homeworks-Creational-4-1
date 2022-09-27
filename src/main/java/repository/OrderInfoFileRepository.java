@@ -25,21 +25,6 @@ public class OrderInfoFileRepository implements OrderInfoRepository {
         this.mapper = mapper;
     }
 
-//    @Override
-//    public OrderInfo getById(String id) {
-//        try (Scanner scanner = new Scanner(repoFile)) {
-//            while (scanner.hasNextLine()) {
-//                OrderInfo orderInfo = mapper.readValue(scanner.nextLine(), OrderInfo.class);
-//                if (orderInfo.getId().equals(id)) {
-//                    return orderInfo;
-//                }
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        return null;
-//    }
-
     @Override
     public OrderInfo getById(String id) {
         if (infoList.contains(id))
@@ -104,11 +89,6 @@ public class OrderInfoFileRepository implements OrderInfoRepository {
             }
         }
     }
-
-//    private static boolean isOrderExist(OrderInfo orderInfo, OrderInfo existsValue) {
-//        return existsValue.getMapOrder().equals(orderInfo.getMapOrder())
-//                && existsValue.getPriceTotal() == orderInfo.getPriceTotal();
-//    }
 
     public void writeString(String json) {
         try (FileWriter writer = new FileWriter(repoFile)) {

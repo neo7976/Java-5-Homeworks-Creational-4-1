@@ -21,8 +21,4 @@ public class Sprite extends ColdDrinks {
         return getPrice();
     }
 
-//    public static void main(String[] args) {
-//        Product sprite = new Sprite(BeverageSize.L);
-//        System.out.println(sprite);
-//    }
 }
