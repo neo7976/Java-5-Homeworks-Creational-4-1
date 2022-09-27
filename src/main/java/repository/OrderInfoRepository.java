@@ -12,6 +12,6 @@ public interface OrderInfoRepository {
 
     OrderInfo remove(String id);
 
-    OrderInfo update(String id);
+    void returnOrder(String id) throws IOException;
 
 }

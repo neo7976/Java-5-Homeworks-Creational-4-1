@@ -49,7 +49,19 @@ public class Shop {
                 }
                 case "3"->{
                     System.out.println("Введите номер заказа:");
-                    System.out.println(orderInfoFileRepository.getById(pf.scanner.nextLine()));
+                    try {
+                        System.out.println(orderInfoFileRepository.getById(pf.scanner.nextLine()));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                case "4" -> {
+                    System.out.println("Введите номер заказа для возврата товара:");
+                    try {
+                        orderInfoFileRepository.returnOrder(pf.scanner.nextLine());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
                 default -> System.out.println("Повторите ввод команды");
             }
