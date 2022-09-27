@@ -1,11 +1,13 @@
 package product;
+
 import java.util.Objects;
 
 //убрали абстракт
-public class ProductImp implements Product{
+public class ProductImp implements Product {
     private String name;
     private int price;
     private int weight;
+    private int count;
 
     public ProductImp() {
     }
@@ -40,10 +42,17 @@ public class ProductImp implements Product{
         this.weight = weight;
     }
 
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
     @Override
     public String toString() {
-        return String.format("(%d г.)\t %s \t\t[%d руб.]",
-                weight, name, price);
+        return String.format("(%d г.)\t %s \t\t[%d руб.] \t\t - %d шт.", weight, name, price, count);
     }
 
     @Override

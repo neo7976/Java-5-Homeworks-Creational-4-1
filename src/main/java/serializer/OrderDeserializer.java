@@ -1,6 +1,5 @@
 package serializer;
 
-import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonMapFormatVisitor;
 import com.google.gson.*;
 import order.OrderInfo;
 import product.ProductImp;
@@ -24,7 +23,7 @@ public class OrderDeserializer implements JsonDeserializer<OrderInfo> {
 
         }
         System.out.println(order);
-        order.setCountTotal(jsonObject.get("Итог").getAsInt());
+        order.setPriceTotal(jsonObject.get("Итог").getAsInt());
         System.out.println(order);
         return order;
     }

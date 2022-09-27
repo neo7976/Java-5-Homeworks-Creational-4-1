@@ -29,24 +29,25 @@ public class Shop {
             if (type.toLowerCase().equals("end")) {
                 break;
             }
-            try {
-                switch (type) {
-                    case "1" -> {
-                        System.out.println("В нашем магазине доступны следующие категории продуктов: ");
-                        pf.getList();
-                        pf.getProduct(Enum.valueOf(ProductType.class, pf.scanner.nextLine().toUpperCase()));
-                        pf.getListBasket();
-                    }
-                    case "2" -> {
-                        String json = orderInfoFileRepository.add(new OrderInfo(pf.getMapBasket(), pf.totalCount()));
-                        pf.remove();
-                    }
-                    default -> System.out.println("Повторите ввод команды");
+            switch (type) {
+                case "1" -> {
+                    System.out.println("В нашем магазине доступны следующие категории продуктов: ");
+                    pf.getList();
+                    pf.getProduct(Enum.valueOf(ProductType.class, pf.scanner.nextLine().toUpperCase()));
+                    pf.getListBasket();
                 }
-            } catch (IllegalArgumentException | IOException e) {
-                e.printStackTrace();
+                case "2" -> {
+                    try {
+                        String json = orderInfoFileRepository.add(new OrderInfo(pf.getListBasket(), pf.totalPrice()));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    pf.remove();
+                }
+                default -> System.out.println("Повторите ввод команды");
             }
         }
+
         pf.scanner.close(); // закрываем сканер, если дальше не будем его использовать
         //todo Прописать корзину, какие продукты и в каком количестве получили и счёт за них
     }

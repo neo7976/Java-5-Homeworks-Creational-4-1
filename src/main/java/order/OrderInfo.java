@@ -1,62 +1,61 @@
 package order;
 
-import product.Product;
 import product.ProductImp;
 
-import java.util.Map;
+import java.util.List;
 
 //Сделать как класс записи в отдельный файл, чтобы можно было прочитать данные
 public class OrderInfo {
     private String id;
-    private Map<ProductImp, Integer> mapOrder;
-    private double countTotal;
+    private List<ProductImp> listOrder;
+    private double priceTotal;
 
 
-    public OrderInfo(String id, Map<ProductImp, Integer> mapOrder
+    public OrderInfo(String id, List<ProductImp> listOrder
             , double countTotal) {
         this.id = id;
-        this.mapOrder = mapOrder;
-        this.countTotal = countTotal;
+        this.listOrder = listOrder;
+        this.priceTotal = countTotal;
     }
 
-    public OrderInfo(Map<ProductImp, Integer> mapOrder
+    public OrderInfo(List<ProductImp> listOrder
             , double countTotal) {
-        this(null, mapOrder, countTotal);
+        this(null, listOrder, countTotal);
     }
 
     public OrderInfo() {
-    }
-
-    public void setCountTotal(double countTotal) {
-        this.countTotal = countTotal;
-    }
-
-    public void setMapOrder(Map<ProductImp, Integer> mapOrder) {
-        this.mapOrder = mapOrder;
-    }
-
-    public Map<ProductImp, Integer> getMapOrder() {
-        return mapOrder;
     }
 
     public String getId() {
         return id;
     }
 
-    public double getCountTotal() {
-        return countTotal;
-    }
-
     public void setId(String id) {
         this.id = id;
+    }
+
+    public List<ProductImp> getListOrder() {
+        return listOrder;
+    }
+
+    public void setListOrder(List<ProductImp> listOrder) {
+        this.listOrder = listOrder;
+    }
+
+    public double getPriceTotal() {
+        return priceTotal;
+    }
+
+    public void setPriceTotal(double priceTotal) {
+        this.priceTotal = priceTotal;
     }
 
     @Override
     public String toString() {
         return "OrderInfo{" +
                 "id='" + id + '\'' +
-                ", mapOrder=" + mapOrder +
-                ", countTotal=" + countTotal +
+                ", listOrder=" + listOrder +
+                ", priceTotal=" + priceTotal +
                 '}';
     }
 }

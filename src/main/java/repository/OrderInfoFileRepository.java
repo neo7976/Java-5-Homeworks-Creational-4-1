@@ -1,15 +1,11 @@
 package repository;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import order.OrderInfo;
-import product.Product;
 import product.ProductImp;
-import product.bread.Bread;
 import serializer.OrderDeserializer;
 import serializer.OrderSerializer;
 import serializer.ProductDeserializer;
@@ -55,13 +51,13 @@ public class OrderInfoFileRepository implements OrderInfoRepository {
         }
 
         OrderInfo order = new OrderInfo(UUID.randomUUID().toString(),
-                orderInfo.getMapOrder(),
-                orderInfo.getCountTotal());
+                orderInfo.getListOrder(),
+                orderInfo.getPriceTotal());
         infoList.add(order);
 
         Gson gson = new GsonBuilder().setPrettyPrinting()
-                .registerTypeAdapter(ProductImp.class, new ProductSerializer())
-                .registerTypeAdapter(OrderInfo.class, new OrderSerializer())
+//                .registerTypeAdapter(ProductImp.class, new ProductSerializer())
+//                .registerTypeAdapter(OrderInfo.class, new OrderSerializer())
                 .create();
         String json = gson.toJson(infoList);
         writeString(json);
@@ -102,10 +98,10 @@ public class OrderInfoFileRepository implements OrderInfoRepository {
         }
     }
 
-    private static boolean isOrderExist(OrderInfo orderInfo, OrderInfo existsValue) {
-        return existsValue.getMapOrder().equals(orderInfo.getMapOrder())
-                && existsValue.getCountTotal() == orderInfo.getCountTotal();
-    }
+//    private static boolean isOrderExist(OrderInfo orderInfo, OrderInfo existsValue) {
+//        return existsValue.getMapOrder().equals(orderInfo.getMapOrder())
+//                && existsValue.getPriceTotal() == orderInfo.getPriceTotal();
+//    }
 
     public void writeString(String json) {
         try (FileWriter writer = new FileWriter(repoFile)) {
@@ -131,8 +127,8 @@ public class OrderInfoFileRepository implements OrderInfoRepository {
 
     public List<OrderInfo> jsonToList(String json) throws IOException {
         Gson gson = new GsonBuilder()
-                .registerTypeAdapter(OrderInfo.class, new OrderDeserializer())
-                .registerTypeAdapter(ProductImp.class, new ProductDeserializer())
+//                .registerTypeAdapter(OrderInfo.class, new OrderDeserializer())
+//                .registerTypeAdapter(ProductImp.class, new ProductDeserializer())
                 .create();
         Type type = new TypeToken<List<OrderInfo>>() {
         }.getType();

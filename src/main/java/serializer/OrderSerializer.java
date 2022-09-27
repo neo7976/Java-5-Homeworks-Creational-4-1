@@ -23,7 +23,7 @@ public class OrderSerializer implements JsonSerializer<OrderInfo> {
             products.add(entry.getValue());
         }
 
-        result.addProperty("Итог", src.getCountTotal());
+        result.addProperty("Итог", src.getPriceTotal());
         return result;
     }
 }

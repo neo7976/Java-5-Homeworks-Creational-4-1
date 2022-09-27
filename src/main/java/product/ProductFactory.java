@@ -11,6 +11,7 @@ import java.util.*;
 
 public class ProductFactory {
     private final Map<ProductImp, Integer> mapBasket = new HashMap<>();
+    private List<ProductImp> listBasket = new ArrayList<>();
     private List<ProductType> productTypeList;
     Factory<Bread, BreadType> breadFactory = new BreadFactory();
     Factory<Fruit, FruitType> fruitFactory = new FruitFactory();
@@ -58,37 +59,74 @@ public class ProductFactory {
         System.out.printf("Какой \"%s\" добавить в корзину?\n", name);
     }
 
-    public void getListBasket() {
+    //todo убрать после переделки на список
+//    public void getListBasket() {
+//        System.out.println("В вашей корзине имеются следующие продукты: ");
+//        for (Map.Entry<ProductImp, Integer> entry : mapBasket.entrySet()) {
+//            System.out.println(entry.getKey() + "\t\t-\t\t" + entry.getValue() + " шт.");
+//        }
+//    }
+
+
+    public void setListBasket(List<ProductImp> listBasket) {
+        this.listBasket = listBasket;
+    }
+
+    public List<ProductImp> getListBasket() {
         System.out.println("В вашей корзине имеются следующие продукты: ");
-        for (Map.Entry<ProductImp, Integer> entry : mapBasket.entrySet()) {
-            System.out.println(entry.getKey() + "\t\t-\t\t" + entry.getValue() + " шт.");
-        }
+        System.out.println(listBasket);
+        return listBasket;
     }
 
-    public Map<ProductImp, Integer> getMapBasket() {
-        return mapBasket;
-    }
-
-    public double totalCount() {
+    //todo убрать после переделки на список
+//    public double totalCount() {
+//        double total = 0;
+//        for (Map.Entry<ProductImp, Integer> entry : mapBasket.entrySet()) {
+//            total += entry.getKey().getPrice() * entry.getValue();
+//        }
+//        return total;
+//    }
+    public double totalPrice() {
         double total = 0;
-        for (Map.Entry<ProductImp, Integer> entry : mapBasket.entrySet()) {
-            total += entry.getKey().getPrice() * entry.getValue();
+        for (ProductImp productImp : listBasket) {
+            total += productImp.getCount() * productImp.getPrice();
         }
         return total;
     }
 
+    //todo убрать после переделки на список
+//    public Map<ProductImp, Integer> getMapBasket() {
+//        return mapBasket;
+//    }
+
+    //todo убрать после переделки на список
+//    public void countProduct(ProductImp product, int value) {
+//        if (value != 0) {
+//            if (mapBasket.containsKey(product)) {
+//                int count = mapBasket.get(product);
+//                mapBasket.put(product, count + value);
+//            } else
+//                mapBasket.put(product, value);
+//        }
+//    }
+
     public void countProduct(ProductImp product, int value) {
-        if (value != 0) {
-            if (mapBasket.containsKey(product)) {
-                int count = mapBasket.get(product);
-                mapBasket.put(product, count + value);
-            } else
-                mapBasket.put(product, value);
+        if (!listBasket.contains(product)) {
+            listBasket.add(product);
+        }
+        for (ProductImp productImp : listBasket) {
+            if (productImp.equals(product))
+                productImp.setCount(value + productImp.getCount());
         }
     }
 
-    public void remove(){
-        mapBasket.clear();
+    //todo убрать после переделки на список
+//    public void remove() {
+//        mapBasket.clear();
+//    }
+
+    public void remove() {
+        listBasket.clear();
     }
 
 
