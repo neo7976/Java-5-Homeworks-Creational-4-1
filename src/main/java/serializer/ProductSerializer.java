@@ -18,6 +18,7 @@ public class ProductSerializer implements JsonSerializer<ProductImp> {
         result.addProperty("name", src.getName());
         result.addProperty("weight", src.getWeight());
         result.addProperty("price", src.getPrice());
+        System.out.println(result);
         return result;
     }
 }

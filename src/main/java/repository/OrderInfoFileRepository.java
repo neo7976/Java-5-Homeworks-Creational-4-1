@@ -10,7 +10,9 @@ import order.OrderInfo;
 import product.Product;
 import product.ProductImp;
 import product.bread.Bread;
+import serializer.OrderDeserializer;
 import serializer.OrderSerializer;
+import serializer.ProductDeserializer;
 import serializer.ProductSerializer;
 
 import java.io.*;
@@ -54,14 +56,12 @@ public class OrderInfoFileRepository implements OrderInfoRepository {
 
         OrderInfo order = new OrderInfo(UUID.randomUUID().toString(),
                 orderInfo.getMapOrder(),
-//                orderInfo.getCountSum(),
                 orderInfo.getCountTotal());
         infoList.add(order);
 
-        //добавить сериализацию для OrderInfo
         Gson gson = new GsonBuilder().setPrettyPrinting()
-                .registerTypeAdapter(OrderInfo.class, new OrderSerializer())
                 .registerTypeAdapter(ProductImp.class, new ProductSerializer())
+                .registerTypeAdapter(OrderInfo.class, new OrderSerializer())
                 .create();
         String json = gson.toJson(infoList);
         writeString(json);
@@ -104,12 +104,10 @@ public class OrderInfoFileRepository implements OrderInfoRepository {
 
     private static boolean isOrderExist(OrderInfo orderInfo, OrderInfo existsValue) {
         return existsValue.getMapOrder().equals(orderInfo.getMapOrder())
-//                && existsValue.getCountSum() == orderInfo.getCountSum()
                 && existsValue.getCountTotal() == orderInfo.getCountTotal();
     }
 
     public void writeString(String json) {
-//        try (FileWriter writer = new FileWriter("src/main/resources/new_data_with_type.json")) {
         try (FileWriter writer = new FileWriter(repoFile)) {
             writer.write(json);
             writer.flush();
@@ -126,14 +124,17 @@ public class OrderInfoFileRepository implements OrderInfoRepository {
             sb.append(s);
         }
         bufferedReader.close();
+        System.out.println(sb.toString());
         return sb.toString();
     }
 
 
     public List<OrderInfo> jsonToList(String json) throws IOException {
-        GsonBuilder builder = new GsonBuilder();
-        Gson gson = builder.create();
-        Type type = new TypeToken<List<ProductImp>>() {
+        Gson gson = new GsonBuilder()
+                .registerTypeAdapter(OrderInfo.class, new OrderDeserializer())
+                .registerTypeAdapter(ProductImp.class, new ProductDeserializer())
+                .create();
+        Type type = new TypeToken<List<OrderInfo>>() {
         }.getType();
         return gson.fromJson(json, type);
     }

@@ -1,7 +1,8 @@
 package product;
 import java.util.Objects;
 
-public abstract class ProductImp implements Product{
+//убрали абстракт
+public class ProductImp implements Product{
     private String name;
     private int price;
     private int weight;

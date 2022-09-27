@@ -27,6 +27,10 @@ public class OrderInfo {
     public OrderInfo() {
     }
 
+    public void setCountTotal(double countTotal) {
+        this.countTotal = countTotal;
+    }
+
     public void setMapOrder(Map<ProductImp, Integer> mapOrder) {
         this.mapOrder = mapOrder;
     }
@@ -45,5 +49,14 @@ public class OrderInfo {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "OrderInfo{" +
+                "id='" + id + '\'' +
+                ", mapOrder=" + mapOrder +
+                ", countTotal=" + countTotal +
+                '}';
     }
 }
