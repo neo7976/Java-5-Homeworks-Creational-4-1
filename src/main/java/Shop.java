@@ -27,6 +27,7 @@ public class Shop {
             System.out.println("\nДля совершения покупки нажмите 1;\n" +
                     "Чтобы оформить заказ нажмите 2;\n" +
                     "Найти свой заказ нажмите 3;\n" +
+                    "Сделать возврат заказа нажмите 4\n;" +
                     "\"end\" для завершения работы.");
             String type = pf.scanner.nextLine();
             if (type.toLowerCase().equals("end")) {
