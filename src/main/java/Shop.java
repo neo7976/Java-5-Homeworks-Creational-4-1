@@ -9,6 +9,7 @@ import product.ProductType;
 import repository.OrderInfoFileRepository;
 
 import java.io.File;
+import java.io.IOException;
 
 public class Shop {
     public static void main(String[] args) {
@@ -16,8 +17,8 @@ public class Shop {
         mapper.registerModules(new JavaTimeModule(), new ParameterNamesModule());
         mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
 
-        File repoFile = new File("src/main/resources/orders.txt");
-//        File repoFile = new File("src/main/resources/orders.json");
+//        File repoFile = new File("src/main/resources/orders.txt");
+        File repoFile = new File("src/main/resources/orders.json");
         OrderInfoFileRepository orderInfoFileRepository = new OrderInfoFileRepository(repoFile, mapper);
 
         ProductFactory pf = new ProductFactory();
@@ -28,24 +29,25 @@ public class Shop {
             if (type.toLowerCase().equals("end")) {
                 break;
             }
-            try {
-                switch (type) {
-                    case "1" -> {
-                        System.out.println("В нашем магазине доступны следующие категории продуктов: ");
-                        pf.getList();
-                        pf.getProduct(Enum.valueOf(ProductType.class, pf.scanner.nextLine().toUpperCase()));
-                        pf.getListBasket();
-                    }
-                    case "2" -> {
-                        String id = orderInfoFileRepository.add(new OrderInfo(pf.getMapBasket(), pf.totalCount()));
-                        pf.remove();
-                    }
-                    default -> System.out.println("Повторите ввод команды");
+            switch (type) {
+                case "1" -> {
+                    System.out.println("В нашем магазине доступны следующие категории продуктов: ");
+                    pf.getList();
+                    pf.getProduct(Enum.valueOf(ProductType.class, pf.scanner.nextLine().toUpperCase()));
+                    pf.getListBasket();
                 }
-            } catch (IllegalArgumentException e) {
-                e.printStackTrace();
+                case "2" -> {
+                    try {
+                        String json = orderInfoFileRepository.add(new OrderInfo(pf.getListBasket(), pf.totalPrice()));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    pf.remove();
+                }
+                default -> System.out.println("Повторите ввод команды");
             }
         }
+
         pf.scanner.close(); // закрываем сканер, если дальше не будем его использовать
         //todo Прописать корзину, какие продукты и в каком количестве получили и счёт за них
     }
