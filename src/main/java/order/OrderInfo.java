@@ -4,7 +4,6 @@ import product.ProductImp;
 
 import java.util.List;
 
-//Сделать как класс записи в отдельный файл, чтобы можно было прочитать данные
 public class OrderInfo {
     private String id;
     private List<ProductImp> listOrder;

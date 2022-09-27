@@ -62,18 +62,6 @@ public class OrderInfoFileRepository implements OrderInfoRepository {
         String json = gson.toJson(infoList);
         writeString(json);
 
-//        try (Scanner scanner = new Scanner(repoFile); FileWriter writer = new FileWriter(repoFile, true)) {
-////            while (scanner.hasNextLine()) {
-////                OrderInfo existValue = mapper.readValue(scanner.nextLine(), OrderInfo.class);
-////                if (isOrderExist(orderInfo, existValue))
-////                    throw new RuntimeException("Order already exist");
-////            }
-//            String serializationOrderInfo = mapper.writeValueAsString(order);
-//            writer.append(String.format("%s%n", serializationOrderInfo));
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
         System.out.printf("Ваш заказ оформлен!\nНомер заказа %s ", order.getId());
         return order.getId();
     }
@@ -120,7 +108,6 @@ public class OrderInfoFileRepository implements OrderInfoRepository {
             sb.append(s);
         }
         bufferedReader.close();
-        System.out.println(sb.toString());
         return sb.toString();
     }
 

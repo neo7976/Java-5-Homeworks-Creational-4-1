@@ -18,10 +18,10 @@ public class OrderSerializer implements JsonSerializer<OrderInfo> {
 
         JsonArray products = new JsonArray();
         result.add("Состав заказа", products);
-        for (Map.Entry<ProductImp, Integer> entry : src.getMapOrder().entrySet()) {
-            products.add(context.serialize(entry.getKey()));
-            products.add(entry.getValue());
-        }
+//        for (Map.Entry<ProductImp, Integer> entry : src.getMapOrder().entrySet()) {
+//            products.add(context.serialize(entry.getKey()));
+//            products.add(entry.getValue());
+//        }
 
         result.addProperty("Итог", src.getPriceTotal());
         return result;

@@ -17,11 +17,11 @@ public class OrderDeserializer implements JsonDeserializer<OrderInfo> {
 
         JsonArray products = jsonObject.getAsJsonArray("Состав заказа");
 
-        for (JsonElement product : products) {
-            order.setMapOrder(new HashMap<ProductImp, Integer>(context.deserialize(product, ProductImp.class),
-                    0 ));
-
-        }
+//        for (JsonElement product : products) {
+//            order.setMapOrder(new HashMap<ProductImp, Integer>(context.deserialize(product, ProductImp.class),
+//                    0 ));
+//
+//        }
         System.out.println(order);
         order.setPriceTotal(jsonObject.get("Итог").getAsInt());
         System.out.println(order);
